@@ -10,7 +10,6 @@ class Character
 
 class CombatableCharacter extends Character
 {
-	name!: string;
 	hp: number;
 	atk: number;
 	def: number;
@@ -38,7 +37,18 @@ class CombatableCharacter extends Character
 
 class NonPlayableCharacter extends Character
 {
+	greetingDialog: string;
 
+	constructor(name: string, greetingDialog: string)
+	{
+		super(name);
+		this.greetingDialog = greetingDialog;
+	}
+
+	greet()
+	{
+		console.log(`[NPC] ${this.name} => ${this.greetingDialog}`);
+	}
 }
 
 class PlayableCharacter extends CombatableCharacter
@@ -91,16 +101,25 @@ class Merchant extends NonPlayableCharacter
 
 }
 
+const scenario01 = () => 
+{
+	const lucia = new Warrior("Lucia XII", 200, 27, 20);
+	const mafia = new EnemyCharacter("Mafia", 120, 30, 10);
+	
+	lucia.showStatus();
+	mafia.showStatus();
+	
+	lucia.attack(mafia);
+	mafia.attack(lucia);
+	
+	lucia.showStatus();
+	mafia.showStatus();
+	
+	const villagerA = new Villager("Donavan", "Hello, It is a good day. What do you think?"); 
+	villagerA.greet();
+}
 
-const lucia = new Warrior("Lucia XII", 200, 27, 20);
-const mafia = new EnemyCharacter("Mafia", 120, 30, 10);
+scenario01();
 
-lucia.showStatus();
-mafia.showStatus();
 
-lucia.attack(mafia);
-mafia.attack(lucia);
-
-lucia.showStatus();
-mafia.showStatus();
 
