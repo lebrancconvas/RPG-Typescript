@@ -8,6 +8,7 @@
     "scripts": {
         "build": "tsc",
         "run": "node dist/app.js",
-        "dev": "tsc && node dist/app.js"
+        "dev": "tsc && node dist/app.js",
+        "test": "ts-node src/app.ts"
     }
 }
