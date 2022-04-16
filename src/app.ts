@@ -247,14 +247,8 @@ const combatTest = () =>
 	
 	mafia.attack(lucia);
 	lucia.attack(mafia);
-	
-	lucia.showStatus();
-	mafia.showStatus();
 
 	mafia.attack(lucia);
-
-	lucia.showStatus();
-	mafia.showStatus();
 }
 
 const npcTest = () =>
