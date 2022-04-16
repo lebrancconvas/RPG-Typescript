@@ -41,7 +41,7 @@ class CombatableCharacter extends Character
 		const luckrate: number[] = [0.2, 0.3, 0.5, 0.6, 0.7, 0.8];
 		const indexRandom: number = Math.floor(Math.random() * luckrate.length);
 
-		const damage: number = this.atk - (target.def * luckrate[indexRandom]);
+		const damage: number = Math.floor(this.atk * (100 / (100 + (this.def * luckrate[indexRandom]))));
 
 		// Action after attack. 
 		if(!this.isFainted)
@@ -198,6 +198,11 @@ class Merchant extends NonPlayableCharacter
 	}
 }
 
+class BossEnemy extends EnemyCharacter
+{
+
+}
+
 class CombatStuff
 {
 	name: string;
@@ -267,11 +272,27 @@ class Party
 }
 
 // Implementation. 
+
+// Create Player
+const joshua = new Warrior("Joshua Materanos", 300, 30, 35);
+const xeronos = new Paladin("Xeronos", 100, 80, 50, 20);
+const lucia = new Warrior("Lucia XII", 200, 27, 20);
+const vivi = new Mage("Vivi", 100, 120, 20, 10);
+
+// Create Party 
+const aimtosonata = new Party("Aim to Sonata", [joshua, xeronos, vivi]);
+
+// Create Enemy
+const mafia = new EnemyCharacter("Mafia II", 120, 30, 10, ["Golden Ticket"]);
+const mafiaLord = new BossEnemy("Mafia XX", 300, 45, 30, ["Premium Golden Ticket"]);
+
+// Create NPC 
+const moobin = new Villager("Moobin", "Hi I am Moobin. Nice to meet you.");
+const villagerA = new Villager("Donavan", "Hello, It is a good day. What do you think?"); 
+const sugarmania = new Merchant("Sugar Mania", "You can trade anything with me.");
+
 const combatTest = () => 
 {
-	const lucia = new Warrior("Lucia XII", 200, 27, 20);
-	const mafia = new EnemyCharacter("Mafia II", 120, 30, 10, ["Golden Ticket"]);
-	
 	lucia.showStatus();
 	mafia.showStatus();
 	
@@ -283,13 +304,11 @@ const combatTest = () =>
 
 const npcTest = () =>
 {
-	const villagerA = new Villager("Donavan", "Hello, It is a good day. What do you think?"); 
 	villagerA.greet();
 }
 
 const skillTest = () => 
 {
-	const vivi = new Mage("Vivi", 100, 120, 20, 10);
 	const eveman = new EnemyCharacter("Eve Man", 200, 50, 20, []);
 	const fire = new Skill("Fire", "Using fire to burn the enemies", 3, 5, false);
 
@@ -310,9 +329,18 @@ const partyTest = () =>
 	kotaroFamily.showMember();
 }
 
+const bossFight = () =>
+{
+	mafiaLord.attack(vivi);
+	mafiaLord.attack(vivi);
+
+	vivi.attack(mafiaLord);
+}
+
 // combatTest();
 // npcTest();
 // skillTest();
-partyTest();
+// partyTest();
+bossFight();
 
 
