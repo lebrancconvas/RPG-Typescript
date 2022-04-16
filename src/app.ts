@@ -236,6 +236,36 @@ class Item extends CombatStuff
 	}
 }
 
+class Party 
+{
+	name: string;
+	member: PlayableCharacter[];
+
+	constructor(name: string, member: PlayableCharacter[])
+	{
+		this.name = name;
+		this.member = member;
+	}
+
+	showMember()
+	{
+		console.log(`-- PARTY: ${this.name} --`)
+		this.member.map(member => {
+			console.log(`* ${member.name}`);
+		})
+	}
+
+	addMember(player: PlayableCharacter)
+	{
+		this.member.push(player);
+	}
+
+	removeMember(player: PlayableCharacter)
+	{
+		this.member = this.member.filter(member => member !== player);
+	}
+}
+
 // Implementation. 
 const combatTest = () => 
 {
@@ -266,8 +296,23 @@ const skillTest = () =>
 	vivi.useSkill(fire, eveman);
 }
 
+const partyTest = () =>
+{
+	const vivi = new Mage("Vivi", 100, 120, 20, 10);
+	const lucia = new Warrior("Lucia XII", 200, 27, 20);
+
+	const kotaroFamily = new Party("Kotaro Family", [vivi, lucia]);
+
+	kotaroFamily.showMember();
+	kotaroFamily.removeMember(vivi);
+	kotaroFamily.showMember();
+	kotaroFamily.addMember(vivi);
+	kotaroFamily.showMember();
+}
+
 // combatTest();
 // npcTest();
-skillTest();
+// skillTest();
+partyTest();
 
 
