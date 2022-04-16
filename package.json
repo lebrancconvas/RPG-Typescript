@@ -1,0 +1,13 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/lebrancconvas/News-Anchor-Reporter-Cheerio.git",
+    "author": "lebrancconvas <lebrancconvas@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "run": "node dist/app.js",
+        "dev": "tsc && node dist/app.js"
+    }
+}
