@@ -45,17 +45,41 @@ class EnemyCharacter extends Character
 
 class Warrior extends PlayableCharacter 
 {
+	constructor(name: string, hp: number, atk: number, def: number) 
+	{
+		super(name, hp, atk, def);
+	}
 
+	showStatus()
+	{
+		console.log(`-- ${this.name} --\nClass: Warrior\nHP: ${this.hp}\nATK: ${this.atk}\nDEF: ${this.def}`);
+	}
 }
 
 class Mage extends PlayableCharacter 
 {
+	constructor(name: string, hp: number, atk: number, def: number) 
+	{
+		super(name, hp, atk, def);
+	}
 
+	showStatus()
+	{
+		console.log(`-- ${this.name} --\nClass: Mage\nHP: ${this.hp}\nATK: ${this.atk}\nDEF: ${this.def}`);
+	}
 }
 
 class Paladin extends PlayableCharacter 
 {
+	constructor(name: string, hp: number, atk: number, def: number) 
+	{
+		super(name, hp, atk, def);
+	}
 
+	showStatus()
+	{
+		console.log(`-- ${this.name} --\nClass: Paladin\nHP: ${this.hp}\nATK: ${this.atk}\nDEF: ${this.def}`);
+	}
 }
 
 class BossEnemy extends EnemyCharacter 
