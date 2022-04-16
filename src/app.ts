@@ -13,6 +13,7 @@ class CombatableCharacter extends Character
 	hp: number;
 	atk: number;
 	def: number;
+	isFainted: boolean = false;
 
 	constructor(name: string, hp: number, atk: number, def: number)
 	{
@@ -29,9 +30,33 @@ class CombatableCharacter extends Character
 
 	attack(target: CombatableCharacter)
 	{
-		const damage: number = this.atk - (target.def * 0.2);
-		target.hp -= damage;
-		console.log(`${this.name} attacks ${target.name}\n${target.name} is received ${damage} damages.`);
+		// Damage Calculation. 
+		const luckrate: number[] = [0.2, 0.3, 0.5, 0.6, 0.7, 0.8];
+		const indexRandom: number = Math.floor(Math.random() * luckrate.length);
+
+		const damage: number = this.atk - (target.def * luckrate[indexRandom]);
+
+		// Action after attack. 
+		if(!this.isFainted)
+		{
+			target.hp -= damage;
+			this.checkFaint();
+			target.checkFaint();
+			console.log(`${this.name} attacks ${target.name}\n${target.name} is received ${damage} damages.`);
+		}
+		else
+		{
+			console.log(`${this.name} cannot attack, because ${this.name} is fainted.`);
+		}
+	}
+
+	checkFaint()
+	{
+		if(this.hp <= 0)
+		{
+			this.hp = 0;
+			this.isFainted = true;
+		}
 	}
 }
 
@@ -101,7 +126,7 @@ class Merchant extends NonPlayableCharacter
 
 }
 
-const scenario01 = () => 
+const combatTest = () => 
 {
 	const lucia = new Warrior("Lucia XII", 200, 27, 20);
 	const mafia = new EnemyCharacter("Mafia", 120, 30, 10);
@@ -109,17 +134,26 @@ const scenario01 = () =>
 	lucia.showStatus();
 	mafia.showStatus();
 	
-	lucia.attack(mafia);
 	mafia.attack(lucia);
+	lucia.attack(mafia);
 	
 	lucia.showStatus();
 	mafia.showStatus();
-	
+
+	mafia.attack(lucia);
+
+	lucia.showStatus();
+	mafia.showStatus();
+}
+
+const npcTest = () =>
+{
 	const villagerA = new Villager("Donavan", "Hello, It is a good day. What do you think?"); 
 	villagerA.greet();
 }
 
-scenario01();
+combatTest();
+npcTest();
 
 
 
